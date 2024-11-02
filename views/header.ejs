@@ -1,0 +1,57 @@
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="/styles/header.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="item item-1">
+      <a href="/">
+        <h1 class="title">
+          BLOGGS.
+          <div class="aurora">
+            <div class="aurora__item"></div>
+            <div class="aurora__item"></div>
+            <div class="aurora__item"></div>
+            <div class="aurora__item"></div>
+          </div>
+        </h1>
+      </a>
+    </div>
+    <div class="item item-2"><a href="/home">Home</a></div>
+    <div class="item item-3"><a href="/blog">Blogs</a></div>
+    <div class="item item-4"><a href="/create">Create</a></div>
+    <div class="item item-5">
+      <a href="https://www.linkedin.com/in/harsh-rathi-3870012aa/">Contact</a>
+    </div>
+
+
+    <div class="menu-icon" onclick="toggleMenu()">☰</div>
+  
+    <div class="dropdown-menu" id="dropdownMenu">
+      <a href="/home">Home</a>
+      <a href="/blog">Blogs</a>
+      <a href="/create">Create</a>
+      <a href="https://www.linkedin.com/in/harsh-rathi-3870012aa/">Contact</a>
+    </div>
+
+    
+  </div>
+
+
+</body>
+
+
+<script>
+  function toggleMenu() {
+      const menu = document.getElementById("dropdownMenu");
+      menu.classList.toggle("show");
+  }
+</script>

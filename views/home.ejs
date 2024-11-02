@@ -1,0 +1,195 @@
+<%- include("header.ejs") %>
+
+<head>
+  <link rel="stylesheet" href="styles/home.css" />
+</head>
+<body>
+  <div class="container-1">
+    <div class="carousel">
+      <div class="List">
+        <% if(!blogs || blogs.length>=1){ %>
+        <% for(var i=0;i<blogs.length;i++){%>
+        <div class="Item">
+          <img
+            src="<%= blogs[i].path %>"
+            alt=""
+          />
+          <div class="content">
+            <div class="title-12">
+              <%= blogs[i].title %>
+            </div>
+
+            <div class="des">
+              <%= blogs[i].description %>
+            </div>
+
+            <!-- <div class="button">
+              <button>SEE MORE</button>
+            </div> -->
+          </div>
+        </div>
+        <% } %>
+        <% }else{ %>
+            <div class="Item">
+                <img
+                  src="img/uploads/green-5124174_1280.jpg-1730325653726-41925537"
+                  alt=""
+                />
+                <div class="content">
+                  <div class="title-12">
+                    Welcome to Bloggs - Where Ideas Come Alive!
+                  </div>
+      
+                  <div class="des">
+                    Dive into a space where your thoughts, ideas, and stories can take
+                    shape. Here, you can create and share blogs, connect with a
+                    vibrant community, and explore a world of perspectives. Whether
+                    you’re here to express your own voice or be inspired by others,
+                    Bloggs is your platform to make an impact through words. Let your
+                    creativity flow and start your blogging journey today!
+                  </div>
+      
+                  <!-- <div class="button">
+                    <button>SEE MORE</button>
+                  </div> -->
+                </div>
+            </div>
+
+            <div class="Item">
+                <img
+                  src="img/pexels-cottonbro-4069292.jpg"
+                  alt=""
+                />
+                <div class="content">
+                  <div class="title-12">
+                    Why Writing a Blog is a Great Habit.
+                  </div>
+      
+                  <div class="des">
+                    Blogging can be more than just sharing ideas; it’s a powerful way to improve communication skills, build confidence, and explore creativity. Discover how regular writing benefits personal growth and connects you with like-minded readers.
+                  </div>
+      
+                  <!-- <div class="button">
+                    <button>SEE MORE</button>
+                  </div> -->
+                </div>
+            </div>
+        <% } %>
+      </div>
+
+      <div class="thumbnail">
+        <% if(!blogs || blogs.length>=1){ %>
+        <% for(var i=0;i<blogs.length;i++){ %>
+        <div class="Item">
+          <img src="<%= blogs[i].path %>" alt="" />
+          <div class="content">
+            <div class="title-12"><%= blogs[i].title %></div>
+            <div class="des"></div>
+          </div>
+        </div>
+        <% } %>
+        <% }else{ %>
+
+            <div class="Item">
+                <img src="img/uploads/green-5124174_1280.jpg-1730325653726-41925537" alt="" />
+                <div class="content">
+                  <div class="title-12">Welcome to Bloggs - Where Ideas Come Alive!</div>
+                  <div class="des"></div>
+                </div>
+            </div>
+
+            <div class="Item">
+                <img src="img/pexels-cottonbro-4069292.jpg" alt="" />
+                <div class="content">
+                  <div class="title-12">Why Writing a Blog is a Great Habit.</div>
+                  <div class="des"></div>
+                </div>
+            </div>
+
+        <% } %>
+
+        <!-- <div class="Item">
+          <img src="img/bg1.jpg" alt="" />
+          <div class="content">
+            <div class="title-12">Name Slider</div>
+            <div class="des">description</div>
+          </div>
+        </div>
+
+        <div class="Item">
+          <img src="img/bg1.jpg" alt="" />
+          <div class="content">
+            <div class="title-12">Name Slider</div>
+            <div class="des">description</div>
+          </div>
+        </div>
+
+        <div class="Item">
+          <img src="img/bg1.jpg" alt="" />
+          <div class="content">
+            <div class="title-12">Name Slider</div>
+            <div class="des">description</div>
+          </div>
+        </div>
+      </div> -->
+    </div>
+
+    <div class="arrows">
+      <button id="prev"><</button>
+      <button id="next">></button>
+    </div>
+
+    <!-- <div class="time"></div> -->
+
+  </div>
+</body>
+
+<script>
+  let nextDom = document.getElementById("next");
+  let prevDom = document.getElementById("prev");
+  let carouselDom = document.querySelector(".carousel");
+  let listItemDom = document.querySelector(".carousel .List");
+  let thumbnailDom = document.querySelector(".carousel .thumbnail");
+
+  nextDom.onclick = function () {
+    showSlider("next");
+  };
+
+  prevDom.onclick = function () {
+    showSlider("prev");
+  };
+
+  let timeRunning = 3000;
+  let timeAutoNext = 70000;
+  let runTimeOut;
+  let runAutoRun = setTimeout(() => {
+    showSlider("next");
+  }, timeAutoNext);
+
+  function showSlider(type) {
+    let itemSlider = document.querySelectorAll(".carousel .List .Item");
+    let itemThumbnail = document.querySelectorAll(".carousel .thumbnail .Item");
+
+    if (type === "next") {
+      listItemDom.appendChild(itemSlider[0]);
+      thumbnailDom.appendChild(itemThumbnail[0]);
+      carouselDom.classList.add("next");
+    } else {
+      let positionLastItem = itemSlider.length - 1;
+      listItemDom.prepend(itemSlider[positionLastItem]);
+      thumbnailDom.prepend(itemThumbnail[positionLastItem]);
+      carouselDom.classList.add("prev");
+    }
+
+    clearTimeout(runTimeOut);
+    runTimeOut = setTimeout(() => {
+      carouselDom.classList.remove("next");
+      carouselDom.classList.remove("prev");
+    }, timeRunning);
+
+    clearTimeout(runAutoRun);
+    runAutoRun = setTimeout(() => {
+      showSlider("next");
+    }, timeAutoNext);
+  }
+</script>

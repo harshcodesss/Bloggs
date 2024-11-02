@@ -1,0 +1,55 @@
+<%- include("header.ejs") %>
+
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&family=Roboto:wght@300&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
+  />
+  <link rel="stylesheet" href="styles/blog.css" />
+</head>
+
+<% if(blogs && blogs.length){ %>
+<div class="blog-container">
+  <% for(var i=0;i<blogs.length;i++){ %>
+  <div class="blog-card">
+    <div class="inner-card">
+      <img src="<%= blogs[i].path %>" alt="" />
+      <div class="card-content">
+        <h2><%= blogs[i].title %></h2>
+        <p>
+          <%= blogs[i].description %>
+        </p>
+        <a href="/know-more/<%= i %>" class="button">
+          Find out more
+          <span class="material-symbols-outlined"> arrow_right_alt </span>
+        </a>
+      </div>
+    </div>
+  </div>
+  <% } %>
+</div>
+<% }else{ %>
+  <div class="blog-container">
+    <div class="blog-card">
+      <div class="inner-card">
+        <img src="img/pexels-cottonbro-4069292.jpg" alt="" />
+        <div class="card-content">
+          <h2>Why Writing a Blog is a Great Habit.</h2>
+          <p>
+            Blogging can be more than just sharing ideas; it’s a powerful way to improve communication skills, build confidence, and explore creativity. Discover how regular writing benefits personal growth and connects you with like-minded readers.
+          </p>
+          <a href="/know-more" class="button">
+            Find out more
+            <span class="material-symbols-outlined"> arrow_right_alt </span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+<% } %>
