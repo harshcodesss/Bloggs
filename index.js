@@ -54,18 +54,25 @@ app.get("/create", (req, res) => {
 //   return res.redirect("/create");
 // });
 
-app.post("/upload-form",uploadfile.single("file"),(req,res) =>{
-    const { path } = req.file;
-    const { textarea } = req.body;
-    const title=textarea[0];
-    const description=textarea[1];
-
-    const newBlog={path: path.replace(/^public\//, ''),title,description};
+app.post("/upload-form", uploadfile.single("file"), (req, res) => {
+  const { path } = req.file;
+  const { textarea } = req.body;
+  const pass = textarea[1];
+  if (pass === "Wednesday") {
+    const title = textarea[0];
+    const description = textarea[2];
+    const newBlog = { path: path.replace(/^public\//, ""), title, description };
     blogs.push(newBlog);
+    console.log(req.file);
+    console.log(req.body);
     console.log(blogs.length);
     console.log(path);
 
-    res.render("blog.ejs", {blogs: blogs});
+    res.render("blog.ejs", { blogs: blogs });
+  }else {
+    const errorMessage = 'Invalid Creator Id!!';
+    res.render("create.ejs", { errorMessage });
+  }
 });
 
 app.get("/know-more/:id", (req, res) => {
